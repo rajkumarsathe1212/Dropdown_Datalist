@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <h1>USING DATALIST</h1>
+      <h3>Created a CRUD of Student Registration</h3>
+
+    <div class="co-lg-12 mt-5 mb-4">
+      <form [formGroup]="formdata" (ngSubmit)="submit(formdata.value)" >
+        <div class="row">
+          <div class="col-lg-4 form-group">
+            <label for="">Enter Name</label>
+            <input type="text" class="form-control" placeholder="Enter Name" formControlName="name">
+          </div>
+          <div class="col-lg-4 form-group">
+            <label for="">Enter Age</label>
+            <input type="number" class="form-control" placeholder="Enter Age" formControlName="createdAt">
+          </div>
+          <!-- DataList -->
+          <div class="col-lg-4 form-group">
+            <label for="">Select University [DataList] </label>
+            <input type="text" class="form-control" placeholder="Select University" id="Data"
+             formControlName="university" list="dataofuniversities" autocomplete="on">
+          </div>
+          <div class="col-lg-6 form-group mt-2">
+            <input type="submit" value="SAVE" class="btn btn-primary me-3">
+            <input type="button" value="CANCEL" class="btn btn-danger" (click)="cancel()">
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr>
+    <div class="col-lg-12 mt-4">
+      <h4>Table</h4>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <td>NO</td>
+            <td>NAME</td>
+            <td>AGE</td>
+            <td>AVATAR</td>
+            <td>UNIVERSITY</td>
+            <td>ACTIONS</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of results,let i = index">
+            <td>{{i+1}}</td>
+            <td>{{result.name}}</td>
+            <td>{{result.createdAt}}</td>
+            <td><img src="{{result.avatar}}" style="height: 50px; width: 50px;" alt=""></td>
+            <td>{{result.university}}</td>
+            <td>
+              <input type="button" class="btn btn-outline-primary" value="E" (click)="edit(result.id)">
+              <input type="button" class="btn btn-outline-danger" value="D" (click)="delete(result.id)">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- Datalist -->
+<datalist id="dataofuniversities">
+  <option *ngFor="let data of Data" value="{{data}}"></option>
+</datalist>
